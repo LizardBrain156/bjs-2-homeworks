@@ -80,7 +80,7 @@ function averageEvenElementsWorker(...arr) {
       }
     }
 
-    return countEven ? sumEven / countEven : 0;
+    return sumEven / countEven;
   }
 
   return 0;
