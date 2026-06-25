@@ -4,25 +4,24 @@ class AlarmClock {
     this.intervalId = null;
   }
 
-addClock(time, callback) {
-  if (!time || !callback) {
-    throw new Error('Отсутствуют обязательные аргументы');
+  addClock(time, callback) {
+    if (!time || !callback) {
+      throw new Error('Отсутствуют обязательные аргументы');
+    }
+
+    const exists = this.alarmCollection.some((alarm) => alarm.time === time);
+
+    if (exists) {
+      console.warn('Уже присутствует звонок на это же время');
+      return;
+    }
+
+    this.alarmCollection.push({
+      time,
+      callback,
+      canCall: true,
+    });
   }
-
-  const exists = this.alarmCollection.some(
-    (alarm) => alarm.time === time,
-  );
-
-  if (exists) {
-    console.warn('Уже присутствует звонок на это же время');
-  }
-
-  this.alarmCollection.push({
-    time,
-    callback,
-    canCall: true,
-  });
-}
 
   removeClock(time) {
     this.alarmCollection = this.alarmCollection.filter(
